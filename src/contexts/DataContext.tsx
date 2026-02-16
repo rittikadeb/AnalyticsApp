@@ -18,7 +18,7 @@ interface DataContextType {
   selectDashboard: (id: string) => void;
   updateDashboard: (dashboard: Dashboard) => void;
   removeDashboard: (id: string) => void;
-  addWidget: (type: 'pivot-table' | 'pivot-chart') => void;
+  addWidget: (type: 'pivot-table' | 'pivot-chart' | 'scorecard') => void;
   updateWidget: (widget: Widget) => void;
   removeWidget: (widgetId: string) => void;
   addFilter: (filter: GlobalFilter) => void;
@@ -113,19 +113,27 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     });
   }, [user, currentDashboard]);
 
-  const addWidget = useCallback((type: 'pivot-table' | 'pivot-chart') => {
+  const addWidget = useCallback((type: 'pivot-table' | 'pivot-chart' | 'scorecard') => {
     if (!currentDashboard) return;
+    const titles: Record<string, string> = {
+      'pivot-table': 'New Pivot Table',
+      'pivot-chart': 'New Pivot Chart',
+      'scorecard': 'New Scorecard',
+    };
+    const configs: Record<string, object> = {
+      'pivot-table': { rows: [], columns: [], values: [] },
+      'pivot-chart': { dimensions: [], measures: [], chartType: 'bar' },
+      'scorecard': { field: '', aggregation: 'sum', label: '' },
+    };
     const widget: Widget = {
       id: uuidv4(),
       type,
-      title: type === 'pivot-table' ? 'New Pivot Table' : 'New Pivot Chart',
+      title: titles[type],
       x: 0,
       y: currentDashboard.widgets.length * 400,
       w: 600,
-      h: 400,
-      config: type === 'pivot-table'
-        ? { rows: [], columns: [], values: [] }
-        : { dimensions: [], measures: [], chartType: 'bar' },
+      h: type === 'scorecard' ? 200 : 400,
+      config: configs[type] as Widget['config'],
     };
     const updated = {
       ...currentDashboard,

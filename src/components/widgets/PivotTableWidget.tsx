@@ -33,18 +33,18 @@ export default function PivotTableWidget({ widget, data, filters, onUpdate, onRe
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm h-full flex flex-col">
-      <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm h-full flex flex-col">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 dark:border-gray-700">
         <input
           value={title}
           onChange={e => setTitle(e.target.value)}
           onBlur={handleTitleBlur}
-          className="text-sm font-medium text-gray-800 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-blue-300 rounded px-1 -ml-1"
+          className="text-sm font-medium text-gray-800 dark:text-gray-200 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-blue-300 rounded px-1 -ml-1"
         />
         <div className="flex items-center gap-1">
           <button
             onClick={() => setShowConfig(!showConfig)}
-            className="p-1 text-gray-400 hover:text-gray-600 rounded"
+            className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded"
             title="Toggle configuration"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -65,7 +65,7 @@ export default function PivotTableWidget({ widget, data, filters, onUpdate, onRe
       </div>
 
       {showConfig && (
-        <div className="px-3 py-2 border-b border-gray-100 bg-gray-50 space-y-2">
+        <div className="px-3 py-2 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 space-y-2">
           <DropZone
             label="Rows"
             accept={['dimension']}
@@ -108,7 +108,7 @@ export default function PivotTableWidget({ widget, data, filters, onUpdate, onRe
             <thead>
               <tr>
                 {result.headers.map((h, i) => (
-                  <th key={i} className="text-left px-2 py-1.5 border-b border-gray-200 text-gray-600 font-medium text-xs whitespace-nowrap">
+                  <th key={i} className="text-left px-2 py-1.5 border-b border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 font-medium text-xs whitespace-nowrap">
                     {h}
                   </th>
                 ))}
@@ -116,9 +116,9 @@ export default function PivotTableWidget({ widget, data, filters, onUpdate, onRe
             </thead>
             <tbody>
               {result.rows.map((row, ri) => (
-                <tr key={ri} className="hover:bg-gray-50">
+                <tr key={ri} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-2 py-1 border-b border-gray-100 text-gray-700 whitespace-nowrap">
+                    <td key={ci} className="px-2 py-1 border-b border-gray-100 dark:border-gray-700 text-gray-700 dark:text-gray-300 whitespace-nowrap">
                       {typeof cell === 'number' ? cell.toLocaleString() : cell}
                     </td>
                   ))}

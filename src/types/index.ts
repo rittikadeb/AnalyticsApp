@@ -31,15 +31,21 @@ export interface Dashboard {
   updatedAt: string;
 }
 
+export interface ScorecardConfig {
+  field: string;
+  aggregation: 'sum' | 'count' | 'average' | 'min' | 'max' | 'unique';
+  label: string;
+}
+
 export interface Widget {
   id: string;
-  type: 'pivot-table' | 'pivot-chart';
+  type: 'pivot-table' | 'pivot-chart' | 'scorecard';
   title: string;
   x: number;
   y: number;
   w: number;
   h: number;
-  config: PivotTableConfig | PivotChartConfig;
+  config: PivotTableConfig | PivotChartConfig | ScorecardConfig;
 }
 
 export interface PivotTableConfig {
@@ -56,7 +62,7 @@ export interface PivotChartConfig {
 
 export interface ValueField {
   field: string;
-  aggregation: 'sum' | 'count' | 'average' | 'min' | 'max';
+  aggregation: 'sum' | 'count' | 'average' | 'min' | 'max' | 'unique';
 }
 
 export interface GlobalFilter {

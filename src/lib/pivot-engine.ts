@@ -44,6 +44,8 @@ function aggregate(values: (number | null)[], agg: string): number {
       return Math.min(...nums);
     case 'max':
       return Math.max(...nums);
+    case 'unique':
+      return new Set(nums).size;
     default:
       return nums.reduce((a, b) => a + b, 0);
   }

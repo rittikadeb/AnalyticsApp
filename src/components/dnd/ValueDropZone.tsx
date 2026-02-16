@@ -12,7 +12,7 @@ interface ValueDropZoneProps {
   className?: string;
 }
 
-const AGGREGATIONS: ValueField['aggregation'][] = ['sum', 'count', 'average', 'min', 'max'];
+const AGGREGATIONS: ValueField['aggregation'][] = ['sum', 'count', 'average', 'min', 'max', 'unique'];
 
 export default function ValueDropZone({ label, items, onDrop, onRemove, onChangeAggregation, className = '' }: ValueDropZoneProps) {
   const [dragOver, setDragOver] = useState(false);
@@ -38,10 +38,10 @@ export default function ValueDropZone({ label, items, onDrop, onRemove, onChange
 
   return (
     <div className={className}>
-      <label className="block text-xs font-medium text-gray-500 mb-1">{label}</label>
+      <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{label}</label>
       <div
         className={`min-h-[40px] border rounded-lg p-1.5 flex flex-wrap gap-1 transition-colors ${
-          dragOver ? 'border-blue-400 bg-blue-50' : 'border-gray-200 bg-gray-50'
+          dragOver ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/30' : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800'
         }`}
         onDragOver={handleDragOver}
         onDragLeave={() => setDragOver(false)}
@@ -53,7 +53,7 @@ export default function ValueDropZone({ label, items, onDrop, onRemove, onChange
         {items.map(item => (
           <span
             key={item.field}
-            className="inline-flex items-center gap-1 bg-white border border-gray-200 rounded px-2 py-0.5 text-xs text-gray-700 shadow-sm"
+            className="inline-flex items-center gap-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded px-2 py-0.5 text-xs text-gray-700 dark:text-gray-300 shadow-sm"
           >
             <select
               value={item.aggregation}

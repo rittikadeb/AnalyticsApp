@@ -101,18 +101,18 @@ export default function PivotChartWidget({ widget, data, filters, onUpdate, onRe
   const ChartComponent = config.chartType === 'line' ? Line : config.chartType === 'pie' ? Pie : Bar;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm h-full flex flex-col">
-      <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100">
+    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm h-full flex flex-col">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-gray-100 dark:border-gray-700">
         <input
           value={title}
           onChange={e => setTitle(e.target.value)}
           onBlur={handleTitleBlur}
-          className="text-sm font-medium text-gray-800 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-blue-300 rounded px-1 -ml-1"
+          className="text-sm font-medium text-gray-800 dark:text-gray-200 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-blue-300 rounded px-1 -ml-1"
         />
         <div className="flex items-center gap-1">
           <button
             onClick={() => setShowConfig(!showConfig)}
-            className="p-1 text-gray-400 hover:text-gray-600 rounded"
+            className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded"
             title="Toggle configuration"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -133,7 +133,7 @@ export default function PivotChartWidget({ widget, data, filters, onUpdate, onRe
       </div>
 
       {showConfig && (
-        <div className="px-3 py-2 border-b border-gray-100 bg-gray-50 space-y-2">
+        <div className="px-3 py-2 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 space-y-2">
           <div>
             <label className="block text-xs font-medium text-gray-500 mb-1">Chart Type</label>
             <div className="flex gap-1">
@@ -143,8 +143,8 @@ export default function PivotChartWidget({ widget, data, filters, onUpdate, onRe
                   onClick={() => updateConfig({ chartType: type === 'column' ? 'bar' : type })}
                   className={`px-2 py-1 text-xs rounded ${
                     (config.chartType === type || (type === 'column' && config.chartType === 'bar'))
-                      ? 'bg-blue-100 text-blue-700 font-medium'
-                      : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                      ? 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium'
+                      : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }`}
                 >
                   {type.charAt(0).toUpperCase() + type.slice(1)}

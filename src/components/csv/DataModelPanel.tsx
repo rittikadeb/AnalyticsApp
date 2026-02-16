@@ -36,9 +36,9 @@ export default function DataModelPanel() {
 
   const typeColor = (type: string) => {
     switch (type) {
-      case 'number': return 'bg-green-100 text-green-700';
-      case 'date': return 'bg-purple-100 text-purple-700';
-      default: return 'bg-blue-100 text-blue-700';
+      case 'number': return 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400';
+      case 'date': return 'bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-400';
+      default: return 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400';
     }
   };
 
@@ -53,12 +53,12 @@ export default function DataModelPanel() {
 
   return (
     <div className="p-2">
-      <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide px-2 mb-2">Data Model</h3>
-      <p className="text-xs text-gray-400 px-2 mb-3">Drag fields to widgets or filter bar</p>
+      <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide px-2 mb-2">Data Model</h3>
+      <p className="text-xs text-gray-400 dark:text-gray-500 px-2 mb-3">Drag fields to widgets or filter bar</p>
       {csvFiles.map(file => (
         <div key={file.id} className="mb-2">
           <div
-            className="flex items-center gap-2 px-2 py-1.5 hover:bg-gray-100 rounded cursor-pointer group"
+            className="flex items-center gap-2 px-2 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer group"
             onClick={() => toggleFile(file.id)}
           >
             <svg
@@ -70,7 +70,7 @@ export default function DataModelPanel() {
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <span className="text-sm text-gray-700 truncate flex-1">{file.name}</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300 truncate flex-1">{file.name}</span>
             <button
               onClick={e => { e.stopPropagation(); removeCSVFile(file.id); }}
               className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500"
@@ -87,12 +87,12 @@ export default function DataModelPanel() {
                   key={col.name}
                   draggable
                   onDragStart={e => handleDragStart(e, col.name, col.type, file.name)}
-                  className="flex items-center gap-2 px-2 py-1 hover:bg-blue-50 rounded cursor-grab active:cursor-grabbing text-sm"
+                  className="flex items-center gap-2 px-2 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded cursor-grab active:cursor-grabbing text-sm"
                 >
                   <span className={`w-5 h-5 rounded text-xs flex items-center justify-center font-mono ${typeColor(col.type)}`}>
                     {typeIcon(col.type)}
                   </span>
-                  <span className="text-gray-600 truncate">{col.name}</span>
+                  <span className="text-gray-600 dark:text-gray-400 truncate">{col.name}</span>
                 </div>
               ))}
             </div>

@@ -45,7 +45,7 @@ export default function GlobalFilterBar() {
     return (
       <div
         className={`border-b px-4 py-2 flex items-center gap-2 transition-colors ${
-          dragOver ? 'border-blue-300 bg-blue-50' : 'border-gray-200 bg-gray-50'
+          dragOver ? 'border-blue-300 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'
         }`}
         onDragOver={e => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
@@ -76,8 +76,8 @@ export default function GlobalFilterBar() {
         const uniqueValues = fieldType === 'string' ? getUniqueValues(filter.field) : [];
 
         return (
-          <div key={filter.id} className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg px-2 py-1 text-xs shadow-sm">
-            <span className="font-medium text-gray-700">{filter.field}</span>
+          <div key={filter.id} className="flex items-center gap-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-2 py-1 text-xs shadow-sm">
+            <span className="font-medium text-gray-700 dark:text-gray-300">{filter.field}</span>
             <select
               value={filter.operator}
               onChange={e => updateFilter({ ...filter, operator: e.target.value as GlobalFilter['operator'] })}
@@ -92,7 +92,7 @@ export default function GlobalFilterBar() {
               <select
                 value={String(filter.value)}
                 onChange={e => updateFilter({ ...filter, value: e.target.value })}
-                className="border border-gray-200 rounded px-1 py-0.5 text-xs focus:outline-none focus:ring-1 focus:ring-blue-300 text-gray-700"
+                className="border border-gray-200 dark:border-gray-600 rounded px-1 py-0.5 text-xs focus:outline-none focus:ring-1 focus:ring-blue-300 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800"
               >
                 <option value="">Select...</option>
                 {uniqueValues.map(v => (
