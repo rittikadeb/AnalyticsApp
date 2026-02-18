@@ -1,0 +1,85 @@
+import { CSVFile } from '@/types';
+import { v4 as uuidv4 } from 'uuid';
+
+export function getSampleSalesData(): CSVFile {
+  return {
+    id: uuidv4(),
+    name: 'sales_data.csv',
+    size: 2048,
+    uploadedAt: new Date().toISOString(),
+    columns: [
+      { name: 'Date', type: 'date', sourceFile: 'sales_data.csv' },
+      { name: 'Region', type: 'string', sourceFile: 'sales_data.csv' },
+      { name: 'Product', type: 'string', sourceFile: 'sales_data.csv' },
+      { name: 'Category', type: 'string', sourceFile: 'sales_data.csv' },
+      { name: 'Units', type: 'number', sourceFile: 'sales_data.csv' },
+      { name: 'Revenue', type: 'number', sourceFile: 'sales_data.csv' },
+      { name: 'Cost', type: 'number', sourceFile: 'sales_data.csv' },
+      { name: 'Profit', type: 'number', sourceFile: 'sales_data.csv' },
+    ],
+    data: [
+      { Date: '2024-01-15', Region: 'North', Product: 'Widget A', Category: 'Widgets', Units: 120, Revenue: 4800, Cost: 2400, Profit: 2400 },
+      { Date: '2024-01-15', Region: 'South', Product: 'Widget B', Category: 'Widgets', Units: 85, Revenue: 4250, Cost: 2125, Profit: 2125 },
+      { Date: '2024-01-15', Region: 'East', Product: 'Gadget X', Category: 'Gadgets', Units: 200, Revenue: 10000, Cost: 6000, Profit: 4000 },
+      { Date: '2024-01-15', Region: 'West', Product: 'Gadget Y', Category: 'Gadgets', Units: 150, Revenue: 9000, Cost: 5400, Profit: 3600 },
+      { Date: '2024-02-15', Region: 'North', Product: 'Widget A', Category: 'Widgets', Units: 140, Revenue: 5600, Cost: 2800, Profit: 2800 },
+      { Date: '2024-02-15', Region: 'South', Product: 'Widget B', Category: 'Widgets', Units: 95, Revenue: 4750, Cost: 2375, Profit: 2375 },
+      { Date: '2024-02-15', Region: 'East', Product: 'Gadget X', Category: 'Gadgets', Units: 180, Revenue: 9000, Cost: 5400, Profit: 3600 },
+      { Date: '2024-02-15', Region: 'West', Product: 'Gadget Y', Category: 'Gadgets', Units: 160, Revenue: 9600, Cost: 5760, Profit: 3840 },
+      { Date: '2024-03-15', Region: 'North', Product: 'Widget A', Category: 'Widgets', Units: 160, Revenue: 6400, Cost: 3200, Profit: 3200 },
+      { Date: '2024-03-15', Region: 'South', Product: 'Widget B', Category: 'Widgets', Units: 110, Revenue: 5500, Cost: 2750, Profit: 2750 },
+      { Date: '2024-03-15', Region: 'East', Product: 'Gadget X', Category: 'Gadgets', Units: 220, Revenue: 11000, Cost: 6600, Profit: 4400 },
+      { Date: '2024-03-15', Region: 'West', Product: 'Gadget Y', Category: 'Gadgets', Units: 175, Revenue: 10500, Cost: 6300, Profit: 4200 },
+      { Date: '2024-04-15', Region: 'North', Product: 'Widget A', Category: 'Widgets', Units: 130, Revenue: 5200, Cost: 2600, Profit: 2600 },
+      { Date: '2024-04-15', Region: 'South', Product: 'Gadget X', Category: 'Gadgets', Units: 190, Revenue: 9500, Cost: 5700, Profit: 3800 },
+      { Date: '2024-04-15', Region: 'East', Product: 'Widget B', Category: 'Widgets', Units: 105, Revenue: 5250, Cost: 2625, Profit: 2625 },
+      { Date: '2024-04-15', Region: 'West', Product: 'Gadget Y', Category: 'Gadgets', Units: 145, Revenue: 8700, Cost: 5220, Profit: 3480 },
+      { Date: '2024-05-15', Region: 'North', Product: 'Gadget X', Category: 'Gadgets', Units: 210, Revenue: 10500, Cost: 6300, Profit: 4200 },
+      { Date: '2024-05-15', Region: 'South', Product: 'Widget A', Category: 'Widgets', Units: 155, Revenue: 6200, Cost: 3100, Profit: 3100 },
+      { Date: '2024-05-15', Region: 'East', Product: 'Gadget Y', Category: 'Gadgets', Units: 170, Revenue: 10200, Cost: 6120, Profit: 4080 },
+      { Date: '2024-05-15', Region: 'West', Product: 'Widget B', Category: 'Widgets', Units: 90, Revenue: 4500, Cost: 2250, Profit: 2250 },
+      { Date: '2024-06-15', Region: 'North', Product: 'Widget A', Category: 'Widgets', Units: 175, Revenue: 7000, Cost: 3500, Profit: 3500 },
+      { Date: '2024-06-15', Region: 'South', Product: 'Gadget X', Category: 'Gadgets', Units: 230, Revenue: 11500, Cost: 6900, Profit: 4600 },
+      { Date: '2024-06-15', Region: 'East', Product: 'Widget B', Category: 'Widgets', Units: 100, Revenue: 5000, Cost: 2500, Profit: 2500 },
+      { Date: '2024-06-15', Region: 'West', Product: 'Gadget Y', Category: 'Gadgets', Units: 185, Revenue: 11100, Cost: 6660, Profit: 4440 },
+    ],
+  };
+}
+
+export function getSampleMarketingData(): CSVFile {
+  return {
+    id: uuidv4(),
+    name: 'marketing_campaigns.csv',
+    size: 1536,
+    uploadedAt: new Date().toISOString(),
+    columns: [
+      { name: 'Campaign', type: 'string', sourceFile: 'marketing_campaigns.csv' },
+      { name: 'Channel', type: 'string', sourceFile: 'marketing_campaigns.csv' },
+      { name: 'Spend', type: 'number', sourceFile: 'marketing_campaigns.csv' },
+      { name: 'Impressions', type: 'number', sourceFile: 'marketing_campaigns.csv' },
+      { name: 'Clicks', type: 'number', sourceFile: 'marketing_campaigns.csv' },
+      { name: 'Conversions', type: 'number', sourceFile: 'marketing_campaigns.csv' },
+      { name: 'Month', type: 'string', sourceFile: 'marketing_campaigns.csv' },
+    ],
+    data: [
+      { Campaign: 'Spring Sale', Channel: 'Google Ads', Spend: 5000, Impressions: 120000, Clicks: 3600, Conversions: 180, Month: 'March' },
+      { Campaign: 'Spring Sale', Channel: 'Facebook', Spend: 3500, Impressions: 95000, Clicks: 2850, Conversions: 142, Month: 'March' },
+      { Campaign: 'Spring Sale', Channel: 'Email', Spend: 800, Impressions: 45000, Clicks: 4500, Conversions: 225, Month: 'March' },
+      { Campaign: 'Brand Awareness', Channel: 'Google Ads', Spend: 8000, Impressions: 250000, Clicks: 5000, Conversions: 100, Month: 'April' },
+      { Campaign: 'Brand Awareness', Channel: 'Instagram', Spend: 4500, Impressions: 180000, Clicks: 7200, Conversions: 216, Month: 'April' },
+      { Campaign: 'Brand Awareness', Channel: 'YouTube', Spend: 6000, Impressions: 300000, Clicks: 6000, Conversions: 120, Month: 'April' },
+      { Campaign: 'Summer Promo', Channel: 'Google Ads', Spend: 7000, Impressions: 160000, Clicks: 4800, Conversions: 240, Month: 'June' },
+      { Campaign: 'Summer Promo', Channel: 'Facebook', Spend: 4000, Impressions: 110000, Clicks: 3300, Conversions: 165, Month: 'June' },
+      { Campaign: 'Summer Promo', Channel: 'Email', Spend: 1000, Impressions: 52000, Clicks: 5200, Conversions: 312, Month: 'June' },
+      { Campaign: 'Summer Promo', Channel: 'Instagram', Spend: 3000, Impressions: 140000, Clicks: 5600, Conversions: 168, Month: 'June' },
+      { Campaign: 'Back to School', Channel: 'Google Ads', Spend: 6500, Impressions: 145000, Clicks: 4350, Conversions: 217, Month: 'August' },
+      { Campaign: 'Back to School', Channel: 'Facebook', Spend: 3800, Impressions: 100000, Clicks: 3000, Conversions: 150, Month: 'August' },
+      { Campaign: 'Back to School', Channel: 'YouTube', Spend: 5500, Impressions: 280000, Clicks: 5600, Conversions: 112, Month: 'August' },
+      { Campaign: 'Holiday Special', Channel: 'Google Ads', Spend: 10000, Impressions: 200000, Clicks: 6000, Conversions: 360, Month: 'December' },
+      { Campaign: 'Holiday Special', Channel: 'Facebook', Spend: 6000, Impressions: 150000, Clicks: 4500, Conversions: 270, Month: 'December' },
+      { Campaign: 'Holiday Special', Channel: 'Email', Spend: 1500, Impressions: 60000, Clicks: 7200, Conversions: 432, Month: 'December' },
+      { Campaign: 'Holiday Special', Channel: 'Instagram', Spend: 5000, Impressions: 200000, Clicks: 8000, Conversions: 320, Month: 'December' },
+      { Campaign: 'Holiday Special', Channel: 'YouTube', Spend: 7000, Impressions: 350000, Clicks: 7000, Conversions: 175, Month: 'December' },
+    ],
+  };
+}

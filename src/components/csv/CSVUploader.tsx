@@ -52,11 +52,11 @@ export default function CSVUploader({ onClose }: CSVUploaderProps) {
   const allDone = progress.length > 0 && progress.every(p => p.status !== 'processing');
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl max-w-lg w-full p-6 border border-gray-200 dark:border-gray-700">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Import CSV Data</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Import CSV Data</h2>
+          <button onClick={onClose} className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -65,21 +65,21 @@ export default function CSVUploader({ onClose }: CSVUploaderProps) {
 
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-            dragOver ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+            dragOver ? 'border-blue-500 bg-blue-50 dark:bg-blue-950/30' : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
           }`}
           onDragOver={e => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
         >
-          <svg className="w-10 h-10 mx-auto text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-10 h-10 mx-auto text-gray-400 dark:text-gray-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
           </svg>
-          <p className="text-gray-600 mb-2">Drag and drop CSV files here</p>
-          <p className="text-gray-400 text-sm mb-3">or</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-2">Drag and drop CSV files here</p>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mb-3">or</p>
           <button
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 text-sm font-medium"
+            className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all disabled:opacity-50 text-sm font-medium shadow-sm"
           >
             Browse Files
           </button>
@@ -91,7 +91,7 @@ export default function CSVUploader({ onClose }: CSVUploaderProps) {
             onChange={handleFileSelect}
             className="hidden"
           />
-          <p className="text-gray-400 text-xs mt-3">Max 50MB per file</p>
+          <p className="text-gray-400 dark:text-gray-500 text-xs mt-3">Max 50MB per file</p>
         </div>
 
         {progress.length > 0 && (
@@ -111,8 +111,8 @@ export default function CSVUploader({ onClose }: CSVUploaderProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 )}
-                <span className={p.status === 'error' ? 'text-red-600' : 'text-gray-700'}>{p.file}</span>
-                {p.error && <span className="text-red-500 text-xs ml-auto">{p.error}</span>}
+                <span className={p.status === 'error' ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300'}>{p.file}</span>
+                {p.error && <span className="text-red-500 dark:text-red-400 text-xs ml-auto">{p.error}</span>}
               </div>
             ))}
           </div>
@@ -122,7 +122,7 @@ export default function CSVUploader({ onClose }: CSVUploaderProps) {
           <div className="mt-4 flex justify-end">
             <button
               onClick={onClose}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all text-sm font-medium shadow-sm"
             >
               Done
             </button>

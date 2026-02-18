@@ -24,6 +24,8 @@ interface DataContextType {
   addFilter: (filter: GlobalFilter) => void;
   updateFilter: (filter: GlobalFilter) => void;
   removeFilter: (filterId: string) => void;
+  exportDashboard: () => string | null;
+  importDashboard: (json: string) => { success: boolean; error?: string };
 }
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -187,12 +189,41 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     updateDashboard(updated);
   }, [currentDashboard, updateDashboard]);
 
+  const exportDashboard = useCallback((): string | null => {
+    if (!currentDashboard) return null;
+    return JSON.stringify(currentDashboard, null, 2);
+  }, [currentDashboard]);
+
+  const importDashboard = useCallback((json: string): { success: boolean; error?: string } => {
+    if (!user) return { success: false, error: 'Not authenticated' };
+    try {
+      const parsed = JSON.parse(json);
+      if (!parsed.name || !Array.isArray(parsed.widgets)) {
+        return { success: false, error: 'Invalid dashboard format: missing name or widgets' };
+      }
+      const dashboard: Dashboard = {
+        ...parsed,
+        id: uuidv4(),
+        userId: user.id,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      saveDashboard(user.id, dashboard);
+      setDashboards(prev => [...prev, dashboard]);
+      setCurrentDashboard(dashboard);
+      return { success: true };
+    } catch {
+      return { success: false, error: 'Invalid JSON format' };
+    }
+  }, [user]);
+
   return (
     <DataContext.Provider value={{
       csvFiles, dashboards, currentDashboard, allColumns, allData,
       addCSVFile, removeCSVFile, createDashboard, selectDashboard,
       updateDashboard, removeDashboard, addWidget, updateWidget,
       removeWidget, addFilter, updateFilter, removeFilter,
+      exportDashboard, importDashboard,
     }}>
       {children}
     </DataContext.Provider>

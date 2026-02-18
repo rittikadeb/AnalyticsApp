@@ -62,7 +62,7 @@ export default function GlobalFilterBar() {
   return (
     <div
       className={`border-b px-4 py-2 flex flex-wrap items-center gap-2 transition-colors ${
-        dragOver ? 'border-blue-300 bg-blue-50' : 'border-gray-200 bg-gray-50'
+        dragOver ? 'border-blue-300 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'
       }`}
       onDragOver={e => { e.preventDefault(); setDragOver(true); }}
       onDragLeave={() => setDragOver(false)}
@@ -105,7 +105,7 @@ export default function GlobalFilterBar() {
                 value={String(filter.value)}
                 onChange={e => updateFilter({ ...filter, value: fieldType === 'number' ? Number(e.target.value) : e.target.value })}
                 placeholder="value"
-                className="border border-gray-200 rounded px-1 py-0.5 w-24 text-xs focus:outline-none focus:ring-1 focus:ring-blue-300 text-gray-700"
+                className="border border-gray-200 dark:border-gray-600 rounded px-1 py-0.5 w-24 text-xs focus:outline-none focus:ring-1 focus:ring-blue-300 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800"
               />
             )}
             <button
