@@ -103,7 +103,11 @@ export default function GlobalFilterBar() {
               <input
                 type={fieldType === 'number' ? 'number' : 'text'}
                 value={String(filter.value)}
-                onChange={e => updateFilter({ ...filter, value: fieldType === 'number' ? Number(e.target.value) : e.target.value })}
+                onChange={e => {
+                  const raw = e.target.value;
+                  const value = fieldType === 'number' && raw !== '' ? Number(raw) : raw;
+                  updateFilter({ ...filter, value });
+                }}
                 placeholder="value"
                 className="border border-gray-200 rounded px-1 py-0.5 w-24 text-xs focus:outline-none focus:ring-1 focus:ring-blue-300 text-gray-700"
               />
