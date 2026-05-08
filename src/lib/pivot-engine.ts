@@ -5,6 +5,8 @@ type Row = Record<string, string | number | null>;
 export function applyFilters(data: Row[], filters: GlobalFilter[]): Row[] {
   return data.filter(row => {
     return filters.every(filter => {
+      if (filter.value === '' || filter.value == null) return true;
+
       const val = row[filter.field];
       if (val == null) return false;
 
@@ -30,14 +32,16 @@ export function applyFilters(data: Row[], filters: GlobalFilter[]): Row[] {
 }
 
 function aggregate(values: (number | null)[], agg: string): number {
+  if (agg === 'count') {
+    return values.filter(v => v != null).length;
+  }
+
   const nums = values.filter((v): v is number => v != null && !isNaN(v));
   if (nums.length === 0) return 0;
 
   switch (agg) {
     case 'sum':
       return nums.reduce((a, b) => a + b, 0);
-    case 'count':
-      return nums.length;
     case 'average':
       return nums.reduce((a, b) => a + b, 0) / nums.length;
     case 'min':
@@ -98,7 +102,7 @@ export function computePivotTable(data: Row[], config: PivotTableConfig): PivotT
 
   sortedGroupKeys.forEach(groupKey => {
     const groupRows = groups.get(groupKey)!;
-    const rowValues = groupKey.split('|||');
+    const rowValues = rowFields.length > 0 ? groupKey.split('|||') : [];
     const resultRow: (string | number)[] = [...rowValues];
 
     if (colFields.length > 0 && valueFields.length > 0) {

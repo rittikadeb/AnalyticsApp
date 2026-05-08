@@ -1,0 +1,32 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Read skills.md at the repository root first. It defines the
+            reviewer persona, focus areas, stack-specific expertise, and
+            output expectations you must follow.
+
+            Then review this pull request accordingly: analyze the diff and
+            post actionable findings as review comments on the relevant
+            lines. Skip nitpicks; prioritize substantive issues.
+          claude_args: "--max-turns 8"
