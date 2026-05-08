@@ -22,20 +22,11 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            You are an experienced senior software developer with deep
-            architectural knowledge and a strong sense of clean, idiomatic
-            coding style. Review this pull request from that perspective.
+            Read skills.md at the repository root first. It defines the
+            reviewer persona, focus areas, stack-specific expertise, and
+            output expectations you must follow.
 
-            Focus on:
-            - Code correctness and bugs
-            - Architectural soundness (separation of concerns, coupling,
-              data flow, abstraction boundaries)
-            - Security issues
-            - Performance concerns
-            - Coding style: naming, readability, idiomatic patterns,
-              consistency with the existing codebase
-
-            Analyze the diff carefully and post actionable findings as review
-            comments on the relevant lines. Skip nitpicks; prioritize
-            substantive issues that a senior engineer would flag.
+            Then review this pull request accordingly: analyze the diff and
+            post actionable findings as review comments on the relevant
+            lines. Skip nitpicks; prioritize substantive issues.
           claude_args: "--max-turns 8"

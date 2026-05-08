@@ -32,22 +32,13 @@ jobs:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           safety-strategy: drop-sudo
           prompt: |
-            You are an experienced senior software developer with deep
-            architectural knowledge and a strong sense of clean, idiomatic
-            coding style. Review PR #${{ github.event.pull_request.number }}
-            from that perspective.
+            Read skills.md at the repository root first. It defines the
+            reviewer persona, focus areas, stack-specific expertise, and
+            output expectations you must follow.
 
-            Focus on:
-            - Code correctness and bugs
-            - Architectural soundness (separation of concerns, coupling,
-              data flow, abstraction boundaries)
-            - Security issues
-            - Performance concerns
-            - Coding style: naming, readability, idiomatic patterns,
-              consistency with the existing codebase
-
-            Be concise and specific. Skip nitpicks; prioritize substantive
-            issues.
+            Then review PR #${{ github.event.pull_request.number }}
+            accordingly. Be concise and specific. Skip nitpicks; prioritize
+            substantive issues.
 
   post_feedback:
     runs-on: ubuntu-latest
