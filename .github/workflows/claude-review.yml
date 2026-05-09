@@ -48,4 +48,12 @@ jobs:
             Stay strictly in your lane. A clean review with
             `Summary: no issues found in ${{ matrix.persona }} scope.`
             is a valid outcome — do not invent findings.
-          claude_args: "--max-turns 8"
+
+            Ignore generated and vendored files. Do not review changes
+            in: `node_modules/`, `package-lock.json`, `yarn.lock`,
+            `pnpm-lock.yaml`, `bun.lockb`, `.next/`, `dist/`, `build/`,
+            `out/`, `coverage/`, `*.min.js`, `*.min.css`, `*.map`,
+            `__snapshots__/`, `*.snap`, build-output `*.d.ts`, or any
+            file under a path commonly understood to be machine-
+            generated. Only review human-authored source.
+          claude_args: "--model claude-sonnet-4-5 --max-turns 8"

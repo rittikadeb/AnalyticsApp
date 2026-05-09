@@ -23,6 +23,23 @@ own file. Only flag issues that fall within that scope. If you notice
 something outside your scope, ignore it — another persona is responsible
 for it. This keeps reviews non-redundant and easy to action.
 
+## Files to ignore
+
+Skip generated, vendored, and machine-produced files. Do not flag
+issues in:
+
+- `node_modules/`
+- Lockfiles: `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`,
+  `bun.lockb`
+- Build output: `.next/`, `dist/`, `build/`, `out/`, `coverage/`
+- Minified or source-mapped assets: `*.min.js`, `*.min.css`, `*.map`
+- Snapshots: `__snapshots__/`, `*.snap`
+- Generated type declarations from build output (e.g. `*.d.ts` under
+  `dist/` / `.next/`)
+- Any other path commonly understood to be machine-generated
+
+Only review human-authored source.
+
 ## Severity labels
 
 Every review comment must start with a severity label in square

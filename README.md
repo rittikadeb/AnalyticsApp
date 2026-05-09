@@ -29,6 +29,29 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Code Review
+
+Every pull request is reviewed automatically by five specialized Claude
+review personas in parallel:
+
+- **architecture** — separation of concerns, coupling, contracts
+- **correctness** — logic bugs, edge cases, async ordering
+- **security** — trust boundaries, injection, auth, secrets
+- **performance** — algorithmic cost, render cost, memory, I/O
+- **style** — naming, readability, idiom, codebase consistency
+
+Each persona's scope is defined in `.github/review-personas/<persona>.md`,
+with a shared baseline (project context, severity labels, output format)
+in `.github/review-personas/_common.md`. Personas only flag issues
+inside their lane, so the resulting reviews are focused and
+non-redundant. Every comment is tagged with one of `[critical]`,
+`[high]`, `[medium]`, `[low]`, or `[info]`, and each review ends with a
+severity-count summary.
+
+Adding a new persona is a one-file change: drop a new
+`.github/review-personas/<name>.md` and add `<name>` to the matrix in
+`.github/workflows/claude-review.yml`.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
