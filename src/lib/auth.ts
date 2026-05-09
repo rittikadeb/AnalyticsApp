@@ -11,7 +11,13 @@ async function hashPassword(password: string): Promise<string> {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function register(email: string, password: string, name: string): Promise<{ success: boolean; error?: string; user?: User }> {
+  if (!EMAIL_RE.test(email)) {
+    return { success: false, error: 'Please enter a valid email address.' };
+  }
+
   const existing = findUserByEmail(email);
   if (existing) {
     return { success: false, error: 'An account with this email already exists.' };

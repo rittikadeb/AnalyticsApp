@@ -16,9 +16,7 @@ function detectColumnType(values: (string | null | undefined)[]): 'string' | 'nu
     /^\d{2}\/\d{2}\/\d{4}/,
     /^\d{2}-\d{2}-\d{4}/,
   ];
-  const dateCount = sample.filter(v =>
-    datePatterns.some(p => p.test(v!)) || !isNaN(Date.parse(v!))
-  ).length;
+  const dateCount = sample.filter(v => datePatterns.some(p => p.test(v!))).length;
   if (dateCount / sample.length > 0.8) return 'date';
 
   return 'string';
