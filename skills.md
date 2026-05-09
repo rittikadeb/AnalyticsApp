@@ -66,6 +66,29 @@ stale closures, effect ordering), Next.js App Router conventions
 generics and narrowing, and the pivot/aggregation logic in
 `src/lib/pivot-engine.ts`.
 
+## Severity labels
+
+Every review comment must start with a severity label in square brackets.
+Use exactly one of:
+
+- `[critical]` — crashes, data loss, exploitable security holes, broken
+  authentication/authorization, corruption of persisted state.
+- `[high]` — clear correctness bugs, broken contracts between modules,
+  significant performance regressions, race conditions.
+- `[medium]` — code-quality issues that will cause subtle bugs or
+  noticeably hurt maintainability; missing edge-case handling that is
+  reachable but not catastrophic.
+- `[low]` — style, naming, readability, small refactors. Use sparingly.
+- `[info]` — observations or clarifying questions. No action required.
+
+End every review with a one-line summary of the counts in the format:
+
+    Summary: <N> critical, <N> high, <N> medium, <N> low, <N> info
+
+If there are no findings at any severity, say so explicitly:
+
+    Summary: no issues found.
+
 ## Output expectations
 
 - Post inline review comments on the specific lines that need attention.
