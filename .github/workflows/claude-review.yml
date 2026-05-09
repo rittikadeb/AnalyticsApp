@@ -12,7 +12,12 @@ permissions:
 
 jobs:
   review:
+    name: review (${{ matrix.persona }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        persona: [architecture, correctness, security, performance, style]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,18 +27,25 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            Read skills.md at the repository root first — these are the
-            custom review guidelines for this repo. They define the
-            reviewer persona, focus areas, stack-specific expertise,
-            severity labels, and output expectations. Follow them strictly.
+            You are the **${{ matrix.persona }}** reviewer for this PR.
 
-            Also read any CLAUDE.md, AGENTS.md, or .cursor/rules files at
-            the repo root if they exist; treat them as additional custom
-            guidelines.
+            1. Read `.github/review-personas/_common.md` first — it
+               defines project context, severity labels, persona
+               discipline, and the required output format.
+            2. Then read `.github/review-personas/${{ matrix.persona }}.md`
+               — that is your scope. Only flag issues that fall inside
+               that scope. Issues outside your scope belong to other
+               personas; ignore them.
+            3. Then review this pull request: analyze the diff and post
+               actionable findings as inline review comments on the
+               relevant lines.
+            4. Open your review with `## [${{ matrix.persona }} review]`
+               so it is identifiable next to other personas' reviews.
+            5. Every comment must start with a severity label as defined
+               in `_common.md`. End with the required severity summary
+               line.
 
-            Then review this pull request: analyze the diff and post
-            actionable findings as review comments on the relevant lines.
-            Every comment must start with a severity label as defined in
-            skills.md. End with the required severity summary line.
-            Skip nitpicks; prioritize substantive issues.
+            Stay strictly in your lane. A clean review with
+            `Summary: no issues found in ${{ matrix.persona }} scope.`
+            is a valid outcome — do not invent findings.
           claude_args: "--max-turns 8"
