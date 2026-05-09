@@ -59,7 +59,12 @@ export function getCSVFiles(userId: string): CSVFile[] {
 export function saveCSVFile(userId: string, file: CSVFile): void {
   const allFiles = getItem<Record<string, CSVFile[]>>(STORAGE_KEYS.CSV_FILES, {});
   if (!allFiles[userId]) allFiles[userId] = [];
-  allFiles[userId].push(file);
+  const idx = allFiles[userId].findIndex(f => f.id === file.id);
+  if (idx >= 0) {
+    allFiles[userId][idx] = file;
+  } else {
+    allFiles[userId].push(file);
+  }
   setItem(STORAGE_KEYS.CSV_FILES, allFiles);
 }
 
